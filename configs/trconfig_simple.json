@@ -1,0 +1,48 @@
+{
+  "Sys": {
+    "CPUProf": false,
+	  "MemProf": false,
+    "InterfaceStats": false,
+    "OutFolder": "/tmp/"
+  },
+  "Parsers": {
+    "DNSParser": {
+      "Driver": "pcap",
+      "Ifname": "eth0",
+      "Mode": "router"
+    },
+    "TrafficParsers": [
+      {
+        "Driver": "pcap",
+        "Ifname": "eth0",
+        "Mode": "router"
+      }
+    ]
+  },
+  "FlowCache": {
+    "CacheType": "ConcurrentCacheMap",
+    "EvictTime": 600000000000,
+    "CleanupTime": 300000000000,
+    "ShardsCount": 4096,
+    "Anonymize": false
+  },
+  "Stats": {
+    "Run": true,
+    "Mode": "dump",
+    "Append": true
+  },
+  "DNSCache": {
+    "EvictTime": 600000000000,
+    "CleanupTime": 300000000000
+  },
+  "Services": [
+    {
+      "Name": "All",
+      "Filter": {
+        "Prefixes": ["0.0.0.0/0"]
+      },
+      "Collect": ["PacketCounters"],
+      "Emit": 10000000
+    }
+  ]
+}

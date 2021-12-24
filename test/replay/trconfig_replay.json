@@ -1,0 +1,87 @@
+{
+  "Sys": {
+    "CPUProf": false,
+	  "MemProf": false,
+    "InterfaceStats": false,
+    "OutFolder": "/tmp/"
+  },
+  "Parsers": {
+    "DNSParser": {
+      "Driver": "pcap",
+      "Ifname": "lo",
+      "Mode": "router",
+      "Replay": true,
+      "ReplayMAC": "e4:ce:8f:01:4c:54"
+    },
+    "TrafficParsers": [
+      {
+        "Driver": "pcap",
+        "Ifname": "lo",
+        "Mode": "router",
+        "Replay": true,
+        "ReplayMAC": "e4:ce:8f:01:4c:54"
+      }
+    ]
+  },
+  "FlowCache": {
+    "CacheType": "ConcurrentCacheMap",
+    "EvictTime": 600000000000,
+    "CleanupTime": 300000000000,
+    "ShardsCount": 4096,
+    "Anonymize": false
+  },
+  "Stats": {
+    "Run": true,
+    "Mode": "dump",
+    "Append": true
+  },
+  "DNSCache": {
+    "EvictTime": 600000000000,
+    "CleanupTime": 300000000000
+  },
+  "Services": [
+    {
+      "Name": "Youtube",
+      "Filter": {
+        "DomainsString": ["youtube.com", "ytimg.com", "googlevideo.com"]
+      },
+      "Collect": ["PacketCounters", "VideoCounters"],
+      "Emit": 10000000
+    },
+    {
+      "Name": "Netflix",
+      "Filter": {
+        "DomainsString": ["netflix.com","nflxvideo.net","nflximg.net","nflxext.com","nflximg.com","nflxso.net"],
+        "Prefixes": ["23.246.0.0/18", "37.77.184.0/21", "45.57.0.0/17", "64.120.128.0/17", "66.197.128.0/17", "108.175.32.0/20", "185.2.220.0/22", "185.9.188.0/22", "192.173.64.0/18", "198.38.96.0/19", "198.45.48.0/20", "208.75.79.0/24", "2620:10c:7000::/44", "2a00:86c0::/32"]
+      },
+      "Collect": ["PacketCounters", "VideoCounters"],
+      "Emit": 10000000
+    },
+    {
+      "Name": "Amazon",
+      "Filter": {
+        "DomainsString": ["amazon.com", "amazonvideo.com", "primevideo.com", "aiv-cdn.net", "avodassets-a.akamaihd.net"],
+        "DomainsRegex": ["avod.*s3.*-.*.akamaihd.net", "amazon.*.llwnd.net", "amazon.*.lldns.net", ".*eu.amazon.fr"]
+      },
+      "Collect": ["PacketCounters", "VideoCounters"],
+      "Emit": 10000000
+    },
+    {
+      "Name": "Hulu",
+      "Filter": {
+        "DomainsString": ["hulu.com", "huluqa.com", "huluim.com", "hulustream", "hulu.conviva.com"],
+        "DomainsRegex": [".*hulu.*.akamaihd.net", ".*hulu.*.edgekey.net",".*hulu.*.akadns.net"]
+      },
+      "Collect": ["PacketCounters", "VideoCounters"],
+      "Emit": 10000000
+    },
+    {
+      "Name": "Twitch",
+      "Filter": {
+        "DomainsString": ["twitch.tv", "ttvnw.net", "twitchcdn.net"]
+      },
+      "Collect": ["PacketCounters", "VideoCounters"],
+      "Emit": 10000000
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+build/
+vendor/
+.DS_Store
+internal/counters/init_counters.go
