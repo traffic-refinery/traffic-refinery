@@ -1,0 +1,48 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+- family-names: "Bronzino"
+  given-names: "Francesco"
+- family-names: "Schmitt"
+  given-names: "Paul"
+- family-names: "Ayoubi"
+  given-names: "Sara"
+- family-names: "Kim"
+  given-names: "Hyojoon"
+- family-names: "Teixeira"
+  given-names: "Renata"
+- family-names: "Feamster"
+  given-names: "Nick"
+title: "Traffic Refinery: Cost-aware network traffic analysis."
+version: 1.0.0
+date-released: 2021-12-24
+url: "https://traffic-refinery.github.io"
+preferred-citation:
+  type: article
+  authors:
+  - family-names: "Bronzino"
+    given-names: "Francesco"
+  - family-names: "Schmitt"
+    given-names: "Paul"
+  - family-names: "Ayoubi"
+    given-names: "Sara"
+  - family-names: "Kim"
+    given-names: "Hyojoon"
+  - family-names: "Teixeira"
+    given-names: "Renata"
+  - family-names: "Feamster"
+    given-names: "Nick"
+  title: "Traffic Refinery: Cost-Aware Data Representation for Machine Learning on Network Traffic"
+  month: 12
+  start: 1 # First page number
+  end: 24 # Last page number
+  title: "My awesome research software"
+  issue: "December 2021"
+  volume: 5
+  number: 3
+  year: 2021
+  publisher: "Association for Computing Machinery"
+  url: "https://doi.org/10.1145/3491052"
+  articleno: 40
+  numpages: 24
+  journal: "Proc. ACM Meas. Anal. Comput. Syst."
