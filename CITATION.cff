@@ -32,11 +32,10 @@ preferred-citation:
     given-names: "Renata"
   - family-names: "Feamster"
     given-names: "Nick"
-  title: "Traffic Refinery: Cost-Aware Data Representation for Machine Learning on Network Traffic"
   month: 12
   start: 1 # First page number
   end: 24 # Last page number
-  title: "My awesome research software"
+  title: "Traffic Refinery: Cost-Aware Data Representation for Machine Learning on Network Traffic"
   issue: "December 2021"
   volume: 5
   number: 3
