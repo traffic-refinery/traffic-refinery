@@ -4,6 +4,17 @@ FROM golang:buster AS builder
 RUN apt-get update && \
   apt-get -y install libpcap0.8 libpcap0.8-dev
 
+# Install pfring
+RUN apt-get update && \
+  apt-get -y -q install wget lsb-release && \
+  wget -q http://apt.ntop.org/16.04/all/apt-ntop.deb && dpkg -i apt-ntop.deb && \
+  apt-get clean all && \
+  apt-get update && \
+  apt-get -y install pfring
+
+# Install pfring zero copy if desired. Not working right now
+# RUN apt-get -y install pfring-drivers-zc-dkms
+
 # Set the working directory to ...
 WORKDIR /go/src/github.com/traffic-refinery/traffic-refinery/
 
@@ -27,9 +38,13 @@ FROM debian:buster
 RUN apt-get update && \
   apt-get -y install libpcap0.8 libpcap0.8-dev
 
-# Install tcpreplay
+# Install pfring
 RUN apt-get update && \
-  apt-get -y install tcpreplay
+  apt-get -y -q install wget lsb-release && \
+  wget -q http://apt.ntop.org/16.04/all/apt-ntop.deb && dpkg -i apt-ntop.deb && \
+  apt-get clean all && \
+  apt-get update && \
+  apt-get -y install pfring
 
 WORKDIR /root/
 COPY --from=builder /go/src/github.com/traffic-refinery/traffic-refinery/tr /usr/bin/
@@ -37,14 +52,8 @@ COPY --from=builder /go/src/github.com/traffic-refinery/traffic-refinery/tr /usr
 # Copy configuration files
 ADD ./configs config/
 
-# Copy script files
-ADD ./scripts/run_replay.sh scripts/
-
 # Add folder to drop output.
-VOLUME /tmp
+VOLUME /out
 
-# Add folder to drop output.
-RUN mkdir /out
-
-ENTRYPOINT ["/root/scripts/run_replay.sh"]
-CMD ["-c", "/root/config/trconfig_replay.json", "-p", "10000000000", "-w", "e4:ce:8f:01:4c:54", "-t", "/out/clean_dump.pcap"]
+ENTRYPOINT ["/usr/bin/tr"]
+CMD ["-name", "trconfig_default.json", "-folder", "/root/config/"]
