@@ -1,4 +1,4 @@
-FROM golang:buster
+FROM golang:bookworm
 
 # Install capture libraries
 RUN apt-get update && \

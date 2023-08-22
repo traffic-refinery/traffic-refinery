@@ -1,8 +1,9 @@
 #!/bin/bash
 
 conf="/root/config/trconfig_replay.json"
-hw="e4:ce:8f:01:4c:54"
+hw="a0:ce:c8:0d:2b:a7"
 trace="/out/clean_dump.pcap"
+dlevel=""
 
 while getopts ":c:w:t:r:" opt; do
   case $opt in
@@ -12,12 +13,14 @@ while getopts ":c:w:t:r:" opt; do
     ;;
     t) trace="$OPTARG"
     ;;
+    d) dlevel="-$OPTARG"
+    ;;
     \?) echo "Invalid option -$OPTARG" >&2
     ;;
   esac
 done
 
-/usr/bin/tr -conf $conf -hw $hw &
+/usr/bin/tr -conf $conf -hw $hw $dlevel &
 
 pid=$!
 
