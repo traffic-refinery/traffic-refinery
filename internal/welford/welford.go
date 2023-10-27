@@ -39,7 +39,7 @@ func (wf *Welford) AddValue(val float64) {
 		delta2 := val - wf.Avg
 		wf.m2 = wf.m2 + delta*delta2
 		wf.Var = wf.m2 / (wf.N - 1)
-		wf.StdDev = math.Sqrt(wf.m2)
+		wf.StdDev = math.Sqrt(wf.Var)
 	}
 }
 
