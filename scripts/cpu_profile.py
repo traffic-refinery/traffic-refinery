@@ -8,7 +8,7 @@ def merge_results(outfolder):
   all_results = []
   for f in os.listdir(outfolder):
     result_file = os.path.join(outfolder, f)
-    if result_file.endswith('_cpu.json') and 'all_results' not in result_file:
+    if result_file.endswith('.json') and 'all_results' not in result_file:
       with open(result_file, 'r') as res:
         j = json.load(res)
         all_results.append(j)
@@ -27,11 +27,12 @@ def profile_pcap(fname, outfile, bin_path, config):
     f.close()
 
 
-def run_profiling(folder, outfolder, bin_path, config):
+def run_profiling(folder, outfolder, bin_path, config, loops):
   for f in os.listdir(folder):
     pcap_file = os.path.join(folder, f)
     if pcap_file.endswith('.pcap'):
-      profile_pcap(pcap_file, os.path.join(outfolder, f+'_cpu.json'), bin_path, config)
+      for i in range(0, loops):
+        profile_pcap(pcap_file, os.path.join(outfolder, f+'_cpu_{}.json'.format(i)), bin_path, config)
     
     
 def main():
@@ -40,9 +41,10 @@ def main():
   parser.add_argument('-o', '--outfolder', type=str, default="results", help="Folder where data is stored")
   parser.add_argument('-b', '--bin_path', type=str, default="cpu_profile.go", help="Folder where data is stored")
   parser.add_argument('-c', '--config', type=str, default="tr_config.json", help="Folder where data is stored")
+  parser.add_argument('-l', '--loops', type=int, default=1, help="How many times to run the profiling over the same pcaps")
   args = vars(parser.parse_args())
   
-  run_profiling(args['folder'], args['outfolder'], args['bin_path'], args['config'])
+  run_profiling(args['folder'], args['outfolder'], args['bin_path'], args['config'], args['loops'])
   merge_results(args['outfolder'])
   
 
