@@ -40,6 +40,7 @@ func (f *Flow) AddPacket(pkt *network.Packet) error {
 	}
 
 	for _, counter := range f.Cntrs {
+		log.Debugf("Updating counter of type %s for flow %s", counter.Type(), f.Id)
 		counter.AddPacket(pkt)
 	}
 

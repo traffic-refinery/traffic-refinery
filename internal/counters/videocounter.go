@@ -3,6 +3,8 @@ package counters
 import (
 	"encoding/json"
 
+	log "github.com/sirupsen/logrus"
+
 	"github.com/traffic-refinery/traffic-refinery/internal/network"
 )
 
@@ -31,6 +33,7 @@ const (
 
 // AddPacket updates the flow states based on the packet pkt
 func (vf *VideoCounters) AddPacket(pkt *network.Packet) error {
+	log.Debugf("Updating counter of type %s with packet of dir %d and length %d", vf.Type(), pkt.Dir, pkt.DataLength)
 	if pkt.Dir == network.TrafficOut {
 		if (pkt.IsTCP && pkt.DataLength > 0) || (!pkt.IsTCP && pkt.DataLength > QUICHeaderLen) {
 			if vf.RunningUpstream.TsStart != 0 && vf.RunningUpstream.DownPkts > 0 {

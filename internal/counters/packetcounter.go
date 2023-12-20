@@ -3,6 +3,8 @@ package counters
 import (
 	"encoding/json"
 
+	log "github.com/sirupsen/logrus"
+
 	"github.com/traffic-refinery/traffic-refinery/internal/network"
 )
 
@@ -23,6 +25,7 @@ func (c *PacketCounters) AddPacket(pkt *network.Packet) error {
 		c.OutCounter++
 		c.OutBytes += pkt.Length
 	}
+	log.Debugf("Updated counter of type %s with packet of dir %d and length %d", c.Type(), pkt.Dir, pkt.DataLength)
 	return nil
 }
 

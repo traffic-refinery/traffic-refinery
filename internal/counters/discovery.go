@@ -51,6 +51,7 @@ func (ac *AvailableCounters) Build(counters []string) (map[string]int, error) {
 		} else {
 			return nil, errors.New("counter " + counter + " does not exist")
 		}
+		lastCode++
 	}
 	return ac.nameToId, nil
 }
